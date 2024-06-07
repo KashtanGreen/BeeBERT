@@ -71,7 +71,6 @@ def validation(model, testing_loader, device):
     )
 
 
-
 def train_loop(model, train_loader, val_loader, optimizer, device):
     best_valid_loss = np.inf
     max_epochs_without_improvement = 2

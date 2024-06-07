@@ -1,6 +1,8 @@
 import os
+
 import pandas as pd
 import torch
+
 from utils.data_utils import create_data_loaders
 from utils.model_utils import RobertaClass
 from utils.train_utils import validation
@@ -9,6 +11,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 EXPORT_DIR = "export_dir"
 OUTPUT_FILE = "predictions.csv"
 
+
 def load_model(model_path, model_class, device):
     model = model_class()
     model.load_state_dict(torch.load(model_path))
@@ -16,9 +19,11 @@ def load_model(model_path, model_class, device):
     model.eval()
     return model
 
+
 def infer(model, loader):
     _, predictions, labels, auc, ap, f1 = validation(model, loader, device)
     return predictions, labels, auc, ap, f1
+
 
 if __name__ == "__main__":
     test_data = pd.read_csv("data/test_data.csv")
@@ -29,15 +34,19 @@ if __name__ == "__main__":
 
     predictions, labels, auc, ap, f1 = infer(model, testing_loader)
 
-    print({
-        "ROC_AUC": auc,
-        "AP": ap,
-        "f1": f1,
-    })
+    print(
+        {
+            "ROC_AUC": auc,
+            "AP": ap,
+            "f1": f1,
+        }
+    )
 
-    df_predictions = pd.DataFrame({
-        "Predictions": predictions,
-        "True_Labels": labels,
-    })
+    df_predictions = pd.DataFrame(
+        {
+            "Predictions": predictions,
+            "True_Labels": labels,
+        }
+    )
     df_predictions.to_csv(os.path.join(EXPORT_DIR, OUTPUT_FILE), index=False)
     print(f"Predictions saved to {os.path.join(EXPORT_DIR, OUTPUT_FILE)}")
