@@ -3,3 +3,4 @@
 export_dir/
 __pycache__/
 *.pyc
+/data
