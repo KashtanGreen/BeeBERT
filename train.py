@@ -5,7 +5,7 @@ from utils.model_utils import RobertaClass
 from utils.train_utils import train_loop, loss_fn
 
 
-LEARNING_RATE = 3e-5
+LEARNING_RATE = 1e-5
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
