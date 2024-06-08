@@ -18,6 +18,7 @@ After training the model, it will be necessary to create a production pipeline, 
 ## Launch scheme
 
 ## Project scheme
+```
 .
 ├── README.md
 ├── data
@@ -44,3 +45,4 @@ After training the model, it will be necessary to create a production pipeline, 
     └── train_utils.py
 
 5 directories, 19 files
+```
