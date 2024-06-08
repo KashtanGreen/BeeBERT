@@ -22,27 +22,17 @@ After training the model, it will be necessary to create a production pipeline, 
 .
 ├── README.md
 ├── data
-│   ├── test_data.csv
 │   ├── test_data.csv.dvc
-│   ├── train_data.csv
 │   └── train_data.csv.dvc
-├── export_dir
-│   ├── best_model.pth
-│   └── predictions.csv
 ├── infer.py
 ├── poetry.lock
 ├── pyproject.toml
 ├── train.py
 └── utils
     ├── __init__.py
-    ├── __pycache__
-    │   ├── __init__.cpython-311.pyc
-    │   ├── data_utils.cpython-311.pyc
-    │   ├── model_utils.cpython-311.pyc
-    │   └── train_utils.cpython-311.pyc
     ├── data_utils.py
     ├── model_utils.py
     └── train_utils.py
 
-5 directories, 19 files
+3 directories, 11 files
 ```
