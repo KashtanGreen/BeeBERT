@@ -1,36 +1,27 @@
 # BeeBERT
 MLOps tools for Kaz-RoBERTA-conversational (BeeBERT)
 
-## Problem formulation:
-Kazakhstan's 19 million population speak Kazakh, but the increasingly important technology of artificial intelligence (AI) has not supported the language until now. Beeline Kazakhstan, has been at the forefront of developing AI linguistic models to support the Kazakh language and  making the technology available to all software developers for free. Kaz-RoBERTA-conversational, or BeeBERT for short, is a generative AI technology that will support the customer experience on Beeline’s digital applications, and enable the further development of artificial intelligence-based solutions in Kazakh language.
+## Введение
+19-миллионное население Казахстана говорит на казахском языке, но все более важная технология ИИ до сих пор не поддерживает этот язык. Beeline Казахстан проводит разработки лингвистических моделей ИИ для поддержки казахского языка. [Kaz-RoBERTA-conversational](https://huggingface.co/kz-transformers/kaz-roberta-conversational), или сокращенно BeeBERT, — это генеративная технология ИИ, разрабатываемая Beeline. 
 
-## Dataset:
-MDBKD | Multi-Domain Bilingual Kazakh Dataset is a Kazakh-language dataset containing just over 24 883 808 unique texts from multiple domains. Dataset Description is located at [Hugging Face](https://huggingface.co/datasets/kz-transformers/multidomain-kazakh-dataset).
+## Формулировка задачи: 
+Классификация отзывов пользователей казахского электронного магазина [kaspi shop](https://kaspi.kz/shop/almaty/). Определить общую тональность комментариев, отзывов, проанализировать мнение и отзывы покупателей магазина по отношению к качеству предоставляемой продукции, доставки и т.д. Конкретно в рамках данного проекта - классифицировать отзывы на 2 класса (позитивные и негативные). 
+ 
+Решение поставленной задачи позволит бизнесу яснее понимать отношение клиентов к продукту и находить точки роста для улучшения показателей в тех или иных направлениях.
 
-## Model:
-Kaz-RoBERTa is a transformers model pretrained on a large corpus of Kazakh data in a self-supervised fashion. More precisely, it was pretrained with the Masked language modeling (MLM) objective. We can use this model directly with a pipeline for masked language modeling. Model description s located at [Hugging Face](https://huggingface.co/kz-transformers/kaz-roberta-conversational).
+## Датасет: 
+Данные спаршены из отзывов с сайта [kaspi shop](https://kaspi.kz/shop/almaty/). На сайте вместе с отзывми есть оценки по 5-бальной шкале. Оценки 0 и 1 относим к негативным отзывам, 3-5 - к позитивным. Тем самым получаем датасет, в котором находится отзыв и флаг позитивности/негативности. В train датасете - 5404 отзывов, в test - 1352.
 
-## Prediction method:
-After training the model, it will be necessary to create a production pipeline, which will include the stages of text preprocessing, the use of the trained model to generate responses or continue the dialogue, as well as integration with other sequences. End application models can be built into applications to handle user requests, automated chatbots, or other communication systems. The production pipeline will include blocks for processing input data, passing it through the model and producing a response.
+## Модель:
+Модель основана на архитектуре Roberta. Используется предварительно обученная модель Roberta для казахского языка из библиотеки Transformers ([kaz-roberta](https://huggingface.co/kz-transformers/kaz-roberta-conversational)). Далее линейный слой для предварительной обработки выхода модели перед классификацией. Слой Dropout для регуляризации и предотвращения переобучения. Линейный слой для финальной классификации.
 
-## How to run
-```
-git clone https://github.com/KashtanGreen/BeeBERT.git
-cd BeeBERT
+## Применение в продакшене
+1. получение всех отзывов-комментариев, уже существующих, а также новых появляющихся  
+2. запуск скрипта инференса модели  
+3. сохранение результатов на сервере  
+4. удаление большей части негативных отзывов для повышения доверия покупателей, шучу. Анализ слабых мест.
 
-conda create -n mlops python=3.11 -y
-conda activate mlops
-poetry init
-poetry install
-
-pre-commit install
-pre-commit run -a
-
-python train.py
-python infer.py
-```
-
-## Project scheme
+## Схема проекта
 ```
 .
 ├── README.md
@@ -49,3 +40,21 @@ python infer.py
 
 3 directories, 11 files
 ```
+
+## Как запустить
+```
+git clone https://github.com/KashtanGreen/BeeBERT.git
+cd BeeBERT
+
+conda create -n mlops python=3.11 -y
+conda activate mlops
+poetry init
+poetry install
+
+pre-commit install
+pre-commit run -a
+
+python train.py
+python infer.py
+```
+
