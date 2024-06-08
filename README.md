@@ -1,5 +1,5 @@
 # BeeBERT
-MLOps tools for Kaz-RoBERTA-conversational (BeeBERT)
+Использование инструментов MLOps для задачи классификации отзывов, основанной на модели Kaz-RoBERTA-conversational (BeeBERT).
 
 ## Введение
 19-миллионное население Казахстана говорит на казахском языке, но все более важная технология ИИ до сих пор не поддерживает этот язык. Beeline Казахстан проводит разработки лингвистических моделей ИИ для поддержки казахского языка. [Kaz-RoBERTA-conversational](https://huggingface.co/kz-transformers/kaz-roberta-conversational), или сокращенно BeeBERT, — это генеративная технология ИИ, разрабатываемая Beeline. 
