@@ -13,9 +13,22 @@ Kaz-RoBERTa is a transformers model pretrained on a large corpus of Kazakh data 
 ## Prediction method:
 After training the model, it will be necessary to create a production pipeline, which will include the stages of text preprocessing, the use of the trained model to generate responses or continue the dialogue, as well as integration with other sequences. End application models can be built into applications to handle user requests, automated chatbots, or other communication systems. The production pipeline will include blocks for processing input data, passing it through the model and producing a response.
 
-## Deployment scheme
+## How to run
+```
+git clone https://github.com/KashtanGreen/BeeBERT.git
+cd BeeBERT
 
-## Launch scheme
+conda create -n mlops python=3.11 -y
+conda activate mlops
+poetry init
+poetry install
+
+pre-commit install
+pre-commit run -a
+
+python train.py
+python infer.py
+```
 
 ## Project scheme
 ```
